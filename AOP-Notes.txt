@@ -1,0 +1,92 @@
+AOP Pattern
+=======================================
+Aspect -> Pointcuts (multiple) -> Advices (multiple)
+
+Pointcut expression wild cards:
+=======================================
+starts with exectuion()
+
+	1. public void method() => only when this method called without the params.
+	2. public void method*() => starts with method name called.
+	3. public * method() => any return type with the method name called
+	4. com.surendiran.aopdemo.dao.*.*(..)) => Package.Class.Method(0 to any number of parameters)
+-------------------------------------------------------
+Pointcut Declaration
+
+	@PointCut("execution(* com.surendiran.aopdemo.dao.*.*(..)))") // Poincut declaration
+	private void forDaoPackage() {}
+
+	@Before("forDaoPackage()")
+	public void methodName() {
+	}
+
+----------------------------------------------------------
+excluding getter/setter for advices
+
+	@Pointcut("execution(* com.surendiran.aopdemo.dao.*.*(..))")
+    private void forDaoPackage() { }
+
+    // create a pointcut for getter methods
+    @Pointcut("execution(* com.surendiran.aopdemo.dao.*.get*(..))")
+    private void pointcutDeclarationForGetter() {}
+
+    @Pointcut("execution(* com.surendiran.aopdemo.dao.*.set*(..))")
+    private void pointcutDeclarationForSetter() {}
+
+    @Pointcut("forDaoPackage() && !pointcutDeclarationForGetter() && !pointcutDeclarationForSetter()")
+    private void pointcutDeclarationExcludeGetSet() {}
+
+	@Before("pointcutDeclarationExcludeGetSet()")
+    public void beforeAddAccountAdvice() {
+        System.out.println("\n======>>> Executing @Before advice on addAccount()");
+    }
+
+---------------------------------------------------------
+AfterReturning:
+	
+	Will execute after the method successfully ran. The returning property and parameter name should be same
+	
+	We can modify the data. Original method will get the modified data. Be careful
+
+	@AfterReturning(pointcut = "execution(* com.surendiran.aopdemo.dao.AccountDAO.findAccounts(..))",
+        returning = "result")
+    public void afterReturningFindAccountsAdvice(JoinPoint theJoinPoint, List<Account> result) 
+-----------------------------------------------------------
+
+AfterThrowing:
+	
+	Will execute after the method thrown an exception.
+	
+	@AfterThrowing(
+            pointcut = "execution(* com.surendiran.aopdemo.dao.AccountDAO.findAccounts(..))",
+            throwing = "myException"
+    )
+    public void afterThrowingFindAccoutnsAdvice(JoinPoint theJoinPoint, Throwable myException)
+	
+------------------------------------------------------------
+
+After:
+	Will execute after the method execution regardless of exception or success.
+	
+	This will run after the AfterReturn/AfterThrowing.
+	
+	@After("execution(* com.surendiran.aopdemo.dao.AccountDAO.findAccounts(..))")
+    public void afterFinallyFindAccountAdvice(JoinPoint joinPoint)
+	
+-------------------------------------------------------------
+
+Around:
+	Will execute before and After the method execution successfully ran
+	
+	We need to call the target method manually inorder to run.
+	
+	@Around("execution(* com.surendiran.aopdemo.service.*.getFortune(..))")
+    public Object aroundGetFortune(
+            ProceedingJoinPoint theProceedingJoinPoint
+    ) throws Throwable
+	{
+		Object result = theProceedingJoinPoint.proceed(); // will call the getFortune method
+		
+		return result;
+	}
+	

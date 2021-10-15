@@ -1,0 +1,38 @@
+Annotations:
+======================
+1. Controller
+2. Component
+3. Scope
+4. AutoWired
+5. Qualifier
+6. Bean
+7. Table
+8. Entity
+9. Id
+10. GeneratedValue
+11. Column
+12. JoinColumn
+13. Min
+14. Max
+15. Service
+16. Repository
+17. Transactional
+18. Configuration
+19. ComponentScan
+20. Before
+21. Aspect
+22. EnableWebMvc -> Similar to <mvc:annotation-driven /> in xml.
+23. EnableTransactionManagement
+
+
+----------------------------------------
+AOP:
+1. Aspect -> Grouping of Advices. Will be mentioned for Class
+2. Advice -> Running the method based on the expression given for before or after or etc...
+3. Pointcut -> Assigning expressions for Advices to run
+4. Order -> Based on the order of aspect, the advices will run based
+5. Before -> Will call the method once the pointcut expression satisfies before the actual method called (only will call directly from object)
+6. AfterReturn -> After the object method done the execution. (Wont call if thrown exception)
+7. AfterThrowing -> When exception occurs on method, this will call
+8. After(finally) -> After the method execution regardless of exception or success. This will run after the AfterReturn/AfterThrowing.
+9. Around -> Will execute before and After the method execution successfully ran

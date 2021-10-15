@@ -1,0 +1,15 @@
+Spring MVC:
+	Entry Point: public class AppDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer
+	
+	and Config class should have the @EnableWebMvc and @Configuration annotation.
+	
+===========================================================
+
+Spring Security:
+	Entry Point: public class SecurityConfig extends WebSecurityConfigurerAdapter
+	
+	and Config class should have @EnableWebSecurity and @Configuration annotations.
+	
+	It automatically calls the Spring MVC Configuration, once authentication done successfully.
+
+============================================================
