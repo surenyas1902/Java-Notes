@@ -1,28 +1,29 @@
 Annotations:
 ======================
-1. Controller
-2. Component
-3. Scope
-4. AutoWired
-5. Qualifier
-6. Bean
-7. Table
-8. Entity
-9. Id
-10. GeneratedValue
-11. Column
-12. JoinColumn
-13. Min
-14. Max
-15. Service
-16. Repository
-17. Transactional
-18. Configuration
-19. ComponentScan
-20. Before
-21. Aspect
-22. EnableWebMvc -> Similar to <mvc:annotation-driven /> in xml.
-23. EnableTransactionManagement
+1. Controller - is an annotation used in Spring MVC framework (the component of Spring Framework used to implement Web Application). mapped methods and detects @RequestMapping annotations
+2. Component - is an annotation used for component scanning for registering the classes and bean creation
+3. Scope - Bean creation type. singleton(only one time), prototype(everytime), request, server,
+4. AutoWired - Automatically inject the dependencies in the class
+5. Qualifier - If multiple class inherting the AutoWired class, we need to specify the Qualifer, which class need to be bean created.
+6. Bean - Its just a POJO. created by spring
+7. Table - Specifying the class as the Table for the database for Hibernate.
+8. Entity - defines that a class can be mapped to a table
+9. Id  - Mentioning the Primary Key column
+10. GeneratedValue - for the specification of generation strategies for the values of primary keys. We are using IDENTITY
+11. Column - Specifying the Column for the field. column name from the table to the specific field
+12. JoinColumn - based on which column we need to specify the 
+13. Min - Checking the Min value for the field while validating
+14. Max - Checking the Max value for the field while validating
+15. Service - used in your service layer and annotates classes that perform service tasks. its a best practice
+16. Repository - indicate that the class provides the mechanism for storage, retrieval, search, update and delete operation on objects.
+17. Transactional - when you want the certain method/class(=all methods inside) to be executed in a transaction. It will work if TransactionManagement is enabled. See #21.
+18. Configuration - a class declares one or more @Bean methods and may be processed by the Spring container to generate bean definitions and service requests for those beans at runtime
+19. ComponentScan - to tell Spring the packages to scan for annotated components
+20. EnableWebMvc -> Similar to <mvc:annotation-driven /> in xml.
+21. EnableTransactionManagement - To enable the transactional sql operations for Hibernate.
+22. ControllerAdvice - It allows you to handle exceptions across the whole application
+23. ExceptionHandler - to annotate the method(s) in the controller class for handling the exceptions raised during the execution of the controller methods
+24. PreAuthorize - Method-level security is implemented
 
 
 ----------------------------------------
